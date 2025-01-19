@@ -1,4 +1,4 @@
-local function shareLine()
+local function hoge()
 	local url = unpack(vim.fn.systemlist("git remote get-url origin"))
 	url = url:gsub("ssh", "https")
 	url = url:sub(1, -5)
@@ -6,8 +6,9 @@ local function shareLine()
 	local commit_hash = unpack(vim.fn.systemlist("git show -s --format=%H"))
 
 	local root_path = unpack(vim.fn.systemlist("git rev-parse --show-toplevel"))
+	local root_path_len = #root_path
 	local cur_path = vim.api.nvim_buf_get_name(0)
-	local file_path = cur_path:gsub(root_path, "")
+	local file_path = cur_path:sub(root_path_len + 1)
 
 	local mode = vim.fn.mode()
 
@@ -28,5 +29,5 @@ local function shareLine()
 end
 
 return {
-	shareLine = shareLine,
+	hoge = hoge,
 }
